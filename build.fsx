@@ -187,7 +187,7 @@ Target "Release" (fun _ ->
   ==> "YarnInstall"
   ==> "DotnetRestore"
   ==> "DotnetBuild"
-  ==> "MochaTest"
+//   ==> "MochaTest"
   ==> "DotnetPack"
   ==> "Publish"
   ==> "Release"
