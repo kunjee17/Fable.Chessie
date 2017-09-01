@@ -3,11 +3,11 @@
     <TargetFramework>netstandard1.6</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Fable.MyLib.Tests.fs" />
+    <Compile Include="Fable.Chessie.Tests.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../src/Fable.MyLib.fsproj" />
+    <ProjectReference Include="../src/Fable.Chessie.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

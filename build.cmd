@@ -6,9 +6,9 @@ if errorlevel 1 (
   exit /b %errorlevel%
 )
 
-pushd Content\
-call build.cmd
-call build.cmd Clean
-popd
+REM pushd Content\
+REM call build.cmd
+REM call build.cmd Clean
+REM popd
 
 packages\build\FAKE\tools\FAKE.exe build.fsx %*

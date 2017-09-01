@@ -14,7 +14,7 @@ var babelOptions = {
 }
 
 module.exports = {
-    entry: resolve('./Fable.MyLib.Tests.fsproj'),
+    entry: resolve('./Fable.Chessie.Tests.fsproj'),
     output: {
         filename: 'tests.bundle.js',
         path: resolve('./bin'),
