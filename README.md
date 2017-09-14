@@ -8,7 +8,7 @@
 
 ### Release
 
-In order to push your package to [nuget.org][https://nuget.org] you need to add your API keys to `NUGET_KEY` environmental variable.
+In order to push your package to [nuget.org](https://nuget.org) you need to add your API keys to `NUGET_KEY` environmental variable.
 You can create a key [here](https://www.nuget.org/account/ApiKeys).
 
 - Update RELEASE_NOTES with a new version, data and release notes [ReleaseNotesHelper](http://fake.build/apidocs/fake-releasenoteshelper.html).
