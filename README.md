@@ -1,29 +1,21 @@
-# Fable.MyLib
+# Fable.Chessie
 
-## How to use this templates ?
+## Railway Oriented Programming (ROP)
 
-1. Add your code into `src` folder.
-2. Add your test into `tests` folder. All the tests are run against [mocha](https://www.npmjs.com/package/mocha)
-3. You can now run `build.cmd MochaTest`. This is build the lib for you and run the tests.
+In F# land ROP (Railway Oriented Programming) is quite popular. One can find all the related stuff [here](https://fsharpforfunandprofit.com/rop/). This libray is to bring those goodies to Java Script land. Thanks to Fable that is very much possible.
 
-### Release
+## Chessie
 
-In order to push your package to [nuget.org](https://nuget.org) you need to add your API keys to `NUGET_KEY` environmental variable.
-You can create a key [here](https://www.nuget.org/account/ApiKeys).
+This project is *rip off* of project [Chessie](http://fsprojects.github.io/Chessie/) . That is quite popular in F# land. Basically all ther server specific stuff, C# support is removed. And also provide support of *Chessie specific Result Type* along side of *F# Result Type* . It can be used in any Fable and/or JavaScript project.
 
-- Update RELEASE_NOTES with a new version, data and release notes [ReleaseNotesHelper](http://fake.build/apidocs/fake-releasenoteshelper.html).
-Ex:
+You can find detailed documentation of how to use it over (chessie official page)[http://fsprojects.github.io/Chessie/] . One can use everything mentioned there thanks to awesome [Fable](http://fable.io/) support.
 
-```
-#### 0.2.0 - 30.04.2017
-* FEATURE: Does cool stuff!
-* BUGFIX: Fixes that silly oversight
-```
+## How to Use
 
+One can install [Fable.Chessie](https://www.nuget.org/packages/Fable.Chessie/) over nuget and can use any installation method. Our favorite is Paket one.
 
-- You can then use the Release target. This will:
-  - make a commit bumping the version: Bump version to 0.2.0
-  - publish the package to nuget
-  - push a git tag
+## Contribution
 
-`./build.sh Release`
+Always welcome the contribution, suggetion to make it better.
+We are using [Fable Library Template](https://github.com/TheAngryByrd/Fable.Template.Library) , so use their Readme to run this project.
+> Or just run build.cmd / build.sh.
