@@ -42,37 +42,37 @@ type Result<'TSuccess, 'TMessage> =
 [<AutoOpen>]
 module Trial =
     /// Wraps a value in a Success
-    let inline ok<'TSuccess,'TMessage> (x:'TSuccess) : Result<'TSuccess,'TMessage> = Ok(x, [])
+    let  ok<'TSuccess,'TMessage> (x:'TSuccess) : Result<'TSuccess,'TMessage> = Ok(x, [])
 
     /// Wraps a value in a Success
-    let inline pass<'TSuccess,'TMessage> (x:'TSuccess) : Result<'TSuccess,'TMessage> = Ok(x, [])
+    let  pass<'TSuccess,'TMessage> (x:'TSuccess) : Result<'TSuccess,'TMessage> = Ok(x, [])
 
     /// Wraps a value in a Success and adds a message
-    let inline warn<'TSuccess,'TMessage> (msg:'TMessage) (x:'TSuccess) : Result<'TSuccess,'TMessage> = Ok(x,[msg])
+    let  warn<'TSuccess,'TMessage> (msg:'TMessage) (x:'TSuccess) : Result<'TSuccess,'TMessage> = Ok(x,[msg])
 
     /// Wraps a message in a Failure
-    let inline fail<'TSuccess,'Message> (msg:'Message) : Result<'TSuccess,'Message> = Bad([ msg ])
+    let  fail<'TSuccess,'Message> (msg:'Message) : Result<'TSuccess,'Message> = Bad([ msg ])
 
     /// Executes the given function on a given success or captures the exception in a failure
-    let inline Catch f x =
+    let  Catch f x =
         Result.Try(fun () -> f x)
 
     /// Returns true if the result was not successful.
-    let inline failed result =
+    let  failed result =
         match result with
         | Bad _ -> true
         | _ -> false
 
     /// Takes a Result and maps it with fSuccess if it is a Success otherwise it maps it with fFailure.
-    let inline either fSuccess fFailure trialResult =
+    let  either fSuccess fFailure trialResult =
         match trialResult with
         | Ok(x, msgs) -> fSuccess (x, msgs)
         | Bad(msgs) -> fFailure (msgs)
 
     /// If the given result is a Success the wrapped value will be returned.
     ///Otherwise the function throws an exception with Failure message of the result.
-    let inline returnOrFail result =
-        let inline raiseExn msgs =
+    let  returnOrFail result =
+        let  raiseExn msgs =
             msgs
             |> Seq.map (sprintf "%O")
             |> String.concat (Environment.NewLine + "\t")
@@ -80,30 +80,30 @@ module Trial =
         either fst raiseExn result
 
     /// Appends the given messages with the messages in the given result.
-    let inline mergeMessages msgs result =
-        let inline fSuccess (x, msgs2) = Ok(x, msgs @ msgs2)
-        let inline fFailure errs = Bad(errs @ msgs)
+    let  mergeMessages msgs result =
+        let  fSuccess (x, msgs2) = Ok(x, msgs @ msgs2)
+        let  fFailure errs = Bad(errs @ msgs)
         either fSuccess fFailure result
 
     /// If the result is a Success it executes the given function on the value.
     /// Otherwise the exisiting failure is propagated.
-    let inline bind f result =
-        let inline fSuccess (x, msgs) = f x |> mergeMessages msgs
-        let inline fFailure (msgs) = Bad msgs
+    let  bind f result =
+        let  fSuccess (x, msgs) = f x |> mergeMessages msgs
+        let  fFailure (msgs) = Bad msgs
         either fSuccess fFailure result
 
    /// Flattens a nested result given the Failure types are equal
-    let inline flatten (result : Result<Result<_,_>,_>) =
+    let  flatten (result : Result<Result<_,_>,_>) =
         result |> bind id
 
     /// If the result is a Success it executes the given function on the value.
     /// Otherwise the exisiting failure is propagated.
     /// This is the infix operator version of ErrorHandling.bind
-    let inline (>>=) result f = bind f result
+    let  (>>=) result f = bind f result
 
     /// If the wrapped function is a success and the given result is a success the function is applied on the value.
     /// Otherwise the exisiting error messages are propagated.
-    let inline apply wrappedFunction result =
+    let  apply wrappedFunction result =
         match wrappedFunction, result with
         | Ok(f, msgs1), Ok(x, msgs2) -> Ok(f x, msgs1 @ msgs2)
         | Bad errs, Ok(_, _msgs) -> Bad(errs)
@@ -113,44 +113,44 @@ module Trial =
     /// If the wrapped function is a success and the given result is a success the function is applied on the value.
     /// Otherwise the exisiting error messages are propagated.
     /// This is the infix operator version of ErrorHandling.apply
-    let inline (<*>) wrappedFunction result = apply wrappedFunction result
+    let  (<*>) wrappedFunction result = apply wrappedFunction result
 
     /// Lifts a function into a Result container and applies it on the given result.
-    let inline lift f result = apply (ok f) result
+    let  lift f result = apply (ok f) result
 
     /// Maps a function over the existing error messages in case of failure. In case of success, the message type will be changed and warnings will be discarded.
-    let inline mapFailure f result =
+    let  mapFailure f result =
         match result with
         | Ok (v,_) -> ok v
         | Bad errs -> Bad (f errs)
 
     /// Lifts a function into a Result and applies it on the given result.
     /// This is the infix operator version of ErrorHandling.lift
-    let inline (<!>) f result = lift f result
+    let  (<!>) f result = lift f result
 
     /// Promote a function to a monad/applicative, scanning the monadic/applicative arguments from left to right.
-    let inline lift2 f a b = f <!> a <*> b
+    let  lift2 f a b = f <!> a <*> b
 
     /// If the result is a Success it executes the given success function on the value and the messages.
     /// If the result is a Failure it executes the given failure function on the messages.
     /// Result is propagated unchanged.
-    let inline eitherTee fSuccess fFailure result =
-        let inline tee f x = f x; x;
+    let  eitherTee fSuccess fFailure result =
+        let  tee f x = f x; x;
         tee (either fSuccess fFailure) result
 
     /// If the result is a Success it executes the given function on the value and the messages.
     /// Result is propagated unchanged.
-    let inline successTee f result =
+    let  successTee f result =
         eitherTee f ignore result
 
     /// If the result is a Failure it executes the given function on the messages.
     /// Result is propagated unchanged.
-    let inline failureTee f result =
+    let  failureTee f result =
         eitherTee ignore f result
 
     /// Collects a sequence of Results and accumulates their values.
     /// If the sequence contains an error the error will be propagated.
-    let inline collect xs =
+    let  collect xs =
         Seq.fold (fun result next ->
             match result, next with
             | Ok(rs, m1), Ok(r, m2) -> Ok(r :: rs, m1 @ m2)
@@ -159,25 +159,25 @@ module Trial =
         |> lift List.rev
 
     /// Converts an option into a Result.
-    let inline failIfNone message result =
+    let  failIfNone message result =
         match result with
         | Some x -> ok x
         | None -> fail message
 
     /// Converts a Choice into a Result.
-    let inline ofChoice choice =
+    let  ofChoice choice =
         match choice with
         | Choice1Of2 v -> ok v
         | Choice2Of2 v -> fail v
 
     /// Categorizes a result based on its state and the presence of extra messages
-    let inline (|Pass|Warn|Fail|) result =
+    let  (|Pass|Warn|Fail|) result =
       match result with
       | Ok  (value, []  ) -> Pass  value
       | Ok  (value, msgs) -> Warn (value,msgs)
       | Bad        msgs  -> Fail        msgs
 
-    let inline failOnWarnings result =
+    let  failOnWarnings result =
       match result with
       | Warn (_,msgs) -> Bad msgs
       | _             -> result
