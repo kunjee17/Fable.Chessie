@@ -41,7 +41,7 @@ let inline yarnWorkDir (ws : string) (yarnParams : Yarn.YarnParams) =
 
 Target.create "Clean"
     (fun _ ->
-    !!"docs/**/bin" ++ "docs/**/obj" ++ "src/**/bin" ++ "src/**/obj" ß|> Seq.iter Shell.cleanDir)
+    !!"docs/**/bin" ++ "docs/**/obj" ++ "src/**/bin" ++ "src/**/obj" |> Seq.iter Shell.cleanDir)
 Target.create "Install" (fun _ ->
     !!"src/**/*.fsproj"
     |> Seq.iter (fun s ->
@@ -134,12 +134,8 @@ let pushNuget (releaseNotes : ReleaseNotes.ReleaseNotes) (projFile : string) =
                      WorkingDir = Path.getDirectory nupkg }))
 
 Target.create "PublishNugets" (fun _ ->
-    !!"src/Fable.BluePrint.Core/Fable.BluePrint.Core.fsproj"
-    ++ "src/Fable.BluePrint.DataTime/Fable.BluePrint.DataTime.fsproj"
-    ++ "src/Fable.BluePrint.Select/Fable.BluePrint.Select.fsproj"
-    ++ "src/Fable.BluePrint.Table/Fable.BluePrint.Table.fsproj"
-    ++ "src/Fable.BluePrint.TimeZone/Fable.BluePrint.TimeZone.fsproj"
-    ++ "src/Fable.BluePrint.Icons/Fable.BluePrint.Icons.fsproj"
+    !!"src/Fable.Chessie/Fable.Chessie.fsproj"
+
     |> Seq.iter (fun s ->
            printfn "%s" s
            let projFile = s
@@ -148,7 +144,7 @@ Target.create "PublishNugets" (fun _ ->
            pushNuget release projFile))
 
 // Where to push generated documentation
-let githubLink = "git@github.com:kunjee17/GreenPrint.git"
+let githubLink = "git@github.com:kunjee17/Fable.Chessie.git"
 let publishBranch = "gh-pages"
 let fableRoot = __SOURCE_DIRECTORY__
 let temp = fableRoot </> "temp"
