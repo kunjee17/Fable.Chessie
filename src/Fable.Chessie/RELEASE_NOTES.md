@@ -1,3 +1,6 @@
+#### 0.1.4
+* Updated to support FSharp Result types. Trim down to minimum version.
+
 #### 0.1.3
 * Removed inline functions to resolve combined validation issues
 

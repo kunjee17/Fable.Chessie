@@ -6,9 +6,7 @@ In F# land ROP (Railway Oriented Programming) is quite popular. One can find all
 
 ## Chessie
 
-This project is *rip off* of project [Chessie](http://fsprojects.github.io/Chessie/) . That is quite popular in F# land. Basically all ther server specific stuff, C# support is removed. And also provide support of *Chessie specific Result Type* along side of *F# Result Type* . It can be used in any Fable and/or JavaScript project.
-
-You can find detailed documentation of how to use it over (chessie official page)[http://fsprojects.github.io/Chessie/] . One can use everything mentioned there thanks to awesome [Fable](http://fable.io/) support.
+This project is *rip off* of project [Chessie](http://fsprojects.github.io/Chessie/) . That is quite popular in F# land.
 
 ## How to Use
 
@@ -16,6 +14,9 @@ One can install [Fable.Chessie](https://www.nuget.org/packages/Fable.Chessie/) o
 
 ## Contribution
 
-Always welcome the contribution, suggetion to make it better.
-We are using [Fable Library Template](https://github.com/TheAngryByrd/Fable.Template.Library) , so use their Readme to run this project.
-> Or just run build.cmd / build.sh.
+Always welcome the contribution, suggestions to make it better.
+
+
+### Instructions and Guidelines
+------
+Instructions and guidelines can be found just [here](https://github.com/kunjee17/GreenPrint/blob/master/GUIDELINES.md)
