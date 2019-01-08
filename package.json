@@ -1,12 +1,14 @@
 {
     "private": true,
     "devDependencies": {
-        "babel-core": "6.26.0",
-        "babel-loader": "7.1.1",
-        "babel-preset-es2015": "6.24.1",
-        "fable-loader": "1.0.7",
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-external-helpers": "^7.0.0",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/preset-env": "^7.1.6",
+        "fable-loader": "^2.1.0",
+        "fable-compiler": "^2.1.2",
+        "remotedev": "^0.2.8",
         "isomorphic-fetch": "2.2.1",
-        "mocha": "3.5.0",
         "webpack": "3.5.5"
     }
 }
