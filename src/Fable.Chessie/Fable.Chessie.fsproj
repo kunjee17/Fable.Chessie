@@ -8,7 +8,7 @@
     <RepositoryUrl>https://github.com/kunjee17/Fable.Chessie</RepositoryUrl>
     <PackageTags>fable;elm;fsharp;chessie;rop;railway</PackageTags>
     <Authors>Kunjan Dalal</Authors>
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -17,6 +17,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ROPHelper.fs" />
+  </ItemGroup>
+   <!-- Add source files to "fable" folder in Nuget package -->
+  <ItemGroup>
+    <Content Include="*.fsproj; **\*.fs" PackagePath="fable\" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

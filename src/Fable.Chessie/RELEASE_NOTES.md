@@ -1,3 +1,6 @@
+#### 0.1.5
+* Resolved the binding issue
+
 #### 0.1.4
 * Updated to support FSharp Result types. Trim down to minimum version.
 
