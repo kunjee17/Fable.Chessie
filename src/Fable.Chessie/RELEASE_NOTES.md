@@ -1,3 +1,6 @@
+#### 0.1.6
+* Updated packages for Fable and FSharp.Core
+
 #### 0.1.5
 * Resolved the binding issue
 

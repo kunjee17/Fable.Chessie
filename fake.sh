@@ -1,13 +1,32 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+set -eu
+set -o pipefail
+
+cd "$(dirname "$0")"
+
+PAKET_EXE=.paket/paket.exe
+FAKE_EXE=fake
+
+FSIARGS=""
+FSIARGS2=""
 OS=${OS:-"unknown"}
-
-echo $OSTYPE
 if [ "$OS" != "Windows_NT" ]
 then
-  # Allows NETFramework like net45 to be built using dotnet core tooling with mono
-  export FrameworkPathOverride=$(dirname $(which mono))/../lib/mono/4.5/
+  # Can't use FSIARGS="--fsiargs -d:MONO" in zsh, so split it up
+  # (Can't use arrays since dash can't handle them)
+  FSIARGS="--fsiargs"
+  FSIARGS2="-d:MONO"
 fi
 
-dotnet restore build.proj
-dotnet fake $@
+run() {
+  if [ "$OS" != "Windows_NT" ]
+  then
+    mono "$@"
+  else
+    "$@"
+  fi
+}
+
+run $PAKET_EXE restore
+$FAKE_EXE run build.fsx --target "$@"

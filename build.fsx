@@ -166,4 +166,4 @@ Target.create "PublishDocs" (fun _ ->
 "Build" ==> "YarnInstall" ==> "InstallDocs" ==> "BuildDocs" ==> "PublishDocs"
 
 // start build
-Target.runOrDefault "Build"
+Target.runOrDefaultWithArguments "Build"
